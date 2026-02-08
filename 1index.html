@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💘</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Comic Sans MS', cursive;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(-45deg, #ff5f9e, #ffc371, #ff9a9e);
+  background-size: 400% 400%;
+  animation: bg 8s infinite alternate;
+  text-align: center;
+}
+
+@keyframes bg {
+  0% {background-position: 0% 50%;}
+  100% {background-position: 100% 50%;}
+}
+
+h1 {
+  font-size: 3rem;
+  color: #b30059;
+  margin-bottom: 10px;
+  z-index: 5;
+}
+
+p {
+  font-size: 1.3rem;
+  color: #7a003c;
+  z-index: 5;
+}
+
+.butoane {
+  display: flex;
+  gap: 25px;
+  margin-top: 20px;
+  z-index: 5;
+}
+
+button {
+  padding: 18px 35px;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#da {
+  background: #ff2f6d;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+#nu {
+  background: white;
+}
+
+.inima {
+  position: absolute;
+  top: -10%;
+  animation: cade linear infinite;
+  user-select: none;
+}
+
+@keyframes cade {
+  from { transform: translateY(0) rotate(0deg); }
+  to { transform: translateY(120vh) rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="titlu">Lavinia,vrei să fii Valentine-ul meu? 💘</h1>
+<p id="mesaj">Gândește bine… 😌</p>
+
+<div class="butoane">
+  <button id="da">DA 💖</button>
+  <button id="nu">NU 💔</button>
+</div>
+
+<script>
+let marimeDa = 1;
+let mesaje = [
+  "Ești sigur? 🥺",
+  "Hai mă… 😭",
+  "Nu fi rău 💔",
+  "Te rog frumos 😢",
+  "Ultima șansă 😳",
+  "NU EXISTĂ NU 😈"
+];
+let indexMesaj = 0;
+
+// DA crește + mesaj
+document.getElementById("nu").addEventListener("click", () => {
+  marimeDa += 0.35;
+  document.getElementById("da").style.transform = `scale(${marimeDa})`;
+
+  if (indexMesaj < mesaje.length) {
+    document.getElementById("mesaj").innerText = mesaje[indexMesaj];
+    indexMesaj++;
+  }
+});
+
+// NU fuge
+document.getElementById("nu").addEventListener("mouseover", () => {
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+  document.getElementById("nu").style.position = "absolute";
+  document.getElementById("nu").style.left = x + "px";
+  document.getElementById("nu").style.top = y + "px";
+});
+
+// CÂND ZICE DA
+document.getElementById("da").addEventListener("click", () => {
+  document.body.innerHTML = `
+    <h1>ȘTIAM EU 😍💍</h1>
+    <p>Suntem oficial 💖</p>
+    <h2>Te iubesc enorm ❤️❤️❤️</h2>
+  `;
+});
+
+// INIMOARE
+function inima() {
+  const h = document.createElement("div");
+  h.className = "inima";
+  h.innerText = "💖";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.fontSize = Math.random() * 25 + 15 + "px";
+  h.style.animationDuration = Math.random() * 3 + 3 + "s";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}
+setInterval(inima, 200);
+</script>
+
+</body>
+</html>
